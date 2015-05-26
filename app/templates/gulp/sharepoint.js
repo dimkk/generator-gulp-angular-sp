@@ -59,6 +59,7 @@ module.exports = function(options) {
       .pipe($.inject(injectScripts, injectOptionsJS))
       .pipe($.debug())
       .pipe($.replace('spAppDir = ""', 'spAppDir = "'+options.spAppDir+'"'))
+      .pipe($.replace('anchorElementId = ""', 'anchorElementId = "'+options.anchorElementId+'"'))
       .pipe(gulp.dest(options.mappedSpDir));
   });
 
@@ -67,7 +68,7 @@ module.exports = function(options) {
   gulp.task('copy-sp-app', function () {
     return gulp.src([options.src + '/app/**/*.js', '!' + options.src + '/app/**/*.spec.js', options.src + '/app/**/*.css'])
       .pipe($.debug())
-      .pipe($.replace('spAppDir:""', 'spAppDir:_spPageContextInfo.webServerRelativeUrl + "'+options.spAppDir+'"'))
+      .pipe($.replace('spAppDir=""', 'spAppDir=_spPageContextInfo.webServerRelativeUrl + "'+options.spAppDir+'"'))
       .pipe(gulp.dest(options.mappedSpDir + '/app'));
   });
 

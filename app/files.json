@@ -12,6 +12,7 @@
     "gulp/e2e-tests.js",
     "gulp/proxy.js",
     "gulp/tsd.js",
+    "gulp/sharepoint.js",
 
     "src/favicon.ico",
     "src/assets/images/yeoman.png"
@@ -37,7 +38,7 @@
     "gulp/watch.js",
     "gulp/server.js",
     "gulp/unit-tests.js",
-
+    "src/entry.js",
     "src/app/index.js",
     "src/index.html",
     "src/app/main/main.controller.js",

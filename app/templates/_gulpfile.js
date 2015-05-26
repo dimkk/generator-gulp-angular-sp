@@ -21,8 +21,9 @@ var options = {
     exclude: [<%= wiredepExclusions.join(', ') %>]
 <% } %>
   },
-  mappedSpDir:'Y:\\excel',
-  spAppDir:'/SiteAssets/excel/'
+  mappedSpDir:'z:\\pathToAppFolder\\', // set mapped drive or hive and folder, where app will be *REQUIRED
+  spAppDir:'/SiteAssets/app/', // set path to app after _spPageContextInfo.webServerRelativeUrl *REQUIRED
+  anchorElementId:'' // set id of element to contain app, if empty - it will be body
 };
 
 wrench.readdirSyncRecursive('./gulp').filter(function(file) {

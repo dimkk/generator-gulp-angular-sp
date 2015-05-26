@@ -1,6 +1,6 @@
 'use strict';
 
-var paths = require('./.yo-rc.json')['generator-gulp-angular'].props.paths;
+var paths = require('./.yo-rc.json')['generator-gulp-angular-sp'].props.paths;
 
 // An example configuration file.
 exports.config = {
@@ -21,5 +21,6 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000
-  }
+  },
+  chromeOnly: true
 };

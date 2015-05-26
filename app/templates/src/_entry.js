@@ -3,9 +3,15 @@
     body = true;
   var appContainer = document.createElement('div');
   appContainer.innerHTML = '<div ng-app="<%= appName %>"><div ui-view></div></div>';
-  document.body.appendChild(appContainer);
-  var scripts, styles;
   var spAppDir = "";
+  var anchorElementId = "";
+  var element = document.getElementById(anchorElementId);
+  if (element){
+    element.appendChild(appContainer);
+  } else {
+    document.body.appendChild(appContainer);
+  }
+  var scripts, styles;
   var opts=
   {
     vendor:[

@@ -54,3 +54,7 @@ Thats it. Entry.js will get all this you need to the page. Most of features of o
 * Typescript
 * Enhance prompt with SharePoint specific items
 * Test coverage
+
+
+### Known Issues
+* In Visual Studio - dont use Windows line endings - it will break gulp test

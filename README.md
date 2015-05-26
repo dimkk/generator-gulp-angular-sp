@@ -1,4 +1,4 @@
-# generator-gulp-angular-sp 0.0.1
+# generator-gulp-angular-sp 0.1.1
 
 Offers you a Yeoman generator to initiate a sharepoint application with Angular powered by GulpJS.
 

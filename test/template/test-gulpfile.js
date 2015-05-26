@@ -9,13 +9,13 @@ chai.use(sinonChai);
 var templateTools = require('../template-tools');
 var mockModel = require('./mock-model');
 
-describe('gulp-angular conf template', function () {
-  var conf, model;
+describe('gulp-angular gulpfile template', function () {
+  var gulpfile, model;
 
   before(function() {
-    return templateTools.load('gulp/_conf.js')
+    return templateTools.load('_gulpfile.js')
       .then(function(templateModule) {
-        conf = templateModule;
+        gulpfile = templateModule;
       });
   });
 
@@ -23,13 +23,12 @@ describe('gulp-angular conf template', function () {
     model = mockModel();
   });
 
-  it('should exports directories', function() {
+  it('should ignore tmp and dist directories', function() {
     model.props.paths.src = 'test/src/dir';
     model.props.paths.tmp = 'test/tmp/dir';
     model.props.paths.dist = 'test/dist/dir';
     model.props.paths.e2e = 'test/e2e/dir';
-    var result = conf(model);
-    result.should.match(/exports\.paths = \{/);
+    var result = gulpfile(model);
     result.should.match(/src: 'test\/src\/dir'/);
     result.should.match(/tmp: 'test\/tmp\/dir'/);
     result.should.match(/dist: 'test\/dist\/dir'/);
@@ -38,11 +37,11 @@ describe('gulp-angular conf template', function () {
 
   it('should configure wiredep with wiredep exclusions', function() {
     model.wiredepExclusions = [];
-    var result = conf(model);
+    var result = gulpfile(model);
     result.should.not.match(/exclude:/);
 
     model.wiredepExclusions = ['\'a\'', '\'b\''];
-    result = conf(model);
+    result = gulpfile(model);
     result.should.match(/exclude: \['a', 'b'\]/);
   });
 

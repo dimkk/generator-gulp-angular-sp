@@ -23,16 +23,27 @@ describe('gulp-angular scripts template', function () {
     model = mockModel();
   });
 
+  it('should require the needed modules', function() {
+    model.props.jsPreprocessor.key = 'none';
+    var result = scripts(model);
+    result.should.match(/var browserSync = require\('browser-sync'\);\n\nvar \$/);
+
+    model.props.jsPreprocessor.key = 'typescript';
+    result = scripts(model);
+    result.should.match(/require\('mkdirp'\);/);
+    result.should.not.match(/babelify/);
+  });
+
   it('should add tsd:install as dependencies for typescript', function() {
     model.props.jsPreprocessor.key = 'not typescript';
     var result = scripts(model);
     result.should.match(/gulp\.task\('scripts', function/);
-    result.should.not.match(/typescript\.createProject/);
+    result.should.not.match(/mkdirp/);
 
     model.props.jsPreprocessor.key = 'typescript';
     result = scripts(model);
     result.should.match(/gulp\.task\('scripts', \['tsd:install'\]/);
-    result.should.match(/tsProject = \$\.typescript\.createProject/);
+    result.should.match(/mkdirp\.sync\(options\.tmp\);/);
   });
 
   it('should add the right js preprocessor process', function() {
@@ -46,7 +57,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'coffee';
     model.props.jsPreprocessor.extension = 'coffee';
     result = scripts(model);
-    result.should.match(/gulp\.src.*conf\.paths\.src, '.*\.coffee'/);
+    result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.coffee'\)/);
     result.should.match(/\$\.coffee\(/);
     result.should.match(/\$\.coffeelint\(/);
     result.should.not.match(/babel/);
@@ -56,7 +67,7 @@ describe('gulp-angular scripts template', function () {
     model.props.jsPreprocessor.key = 'typescript';
     model.props.jsPreprocessor.extension = 'ts';
     result = scripts(model);
-    result.should.match(/gulp\.src.*conf\.paths\.src, '.*\.ts'/);
+    result.should.match(/gulp\.src\(options\.src \+ '[^\s]*\.ts'\)/);
     result.should.match(/\$\.tslint\(/);
     result.should.match(/\$\.typescript\(/);
     result.should.not.match(/babel/);

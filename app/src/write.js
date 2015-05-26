@@ -9,11 +9,9 @@ var _ = require('lodash');
  * Add a home made preprocessing which removes lines where there is only a
  * template instruction
  */
-function processor(model) {
-  var data = _.extend({}, model, {_: _});
+function processor(data) {
   return function process(content) {
-    var src = content.toString().replace(/\n<%([^-=])/g, '<%$1');
-    return _.template(src)(data);
+    return _.template(content.toString().replace(/\n<%([^-=])/g, '<%$1'), data);
   };
 }
 

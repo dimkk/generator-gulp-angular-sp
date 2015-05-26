@@ -1,59 +1,15 @@
 'use strict';
 
-var path = require('path');
-var conf = require('./gulp/conf');
-
-var _ = require('lodash');
-var wiredep = require('wiredep');
-
-function listFiles() {
-  var wiredepOptions = _.extend({}, conf.wiredep, {
-    dependencies: true,
-    devDependencies: true
-  });
-
-  return wiredep(wiredepOptions).js
-    .concat([
-<% if (props.jsPreprocessor.key === 'none') { %>
-      path.join(conf.paths.src, '/app/**/*.module.js'),
-      path.join(conf.paths.src, '/app/**/*.js'),
-<% } else if (props.jsPreprocessor.key === 'coffee') { %>
-      path.join(conf.paths.tmp, '/serve/app/**/*.module.js'),
-      path.join(conf.paths.tmp, '/serve/app/**/*.js'),
-<% } else { %>
-      path.join(conf.paths.tmp, '/serve/app/index.module.js'),
-<% } %>
-      path.join(conf.paths.src, '/**/*.spec.js'),
-      path.join(conf.paths.src, '/**/*.mock.js')
-    ]);
-}
-
 module.exports = function(config) {
 
   var configuration = {
-    files: listFiles(),
+    autoWatch : false,
 
-    singleRun: true,
-
-    autoWatch: false,
-
-<% if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { %>
-    frameworks: ['jasmine', 'angular-filesort'],
-
-    angularFilesort: {
-<%   if (props.jsPreprocessor.key === 'none') { %>
-      whitelist: [path.join(conf.paths.src, '/**/!(*.html|*.spec|*.mock).js')]
-<%   } else { %>
-      whitelist: [path.join(conf.paths.tmp, '/**/!(*.html|*.spec|*.mock).js')]
-<%   } %>
-    },
-<% } else { %>
     frameworks: ['jasmine'],
-<% } %>
 
     ngHtml2JsPreprocessor: {
       stripPrefix: 'src/',
-      moduleName: '<%= appName %>'
+      moduleName: 'gulpAngular'
     },
 
 <% if(props.jsPreprocessor.key === 'traceur') { %>
@@ -66,8 +22,6 @@ module.exports = function(config) {
 
     plugins : [
       'karma-phantomjs-launcher',
-<% } if (props.jsPreprocessor.key === 'none' || props.jsPreprocessor.key === 'coffee') { %>
-      'karma-angular-filesort',
 <% } %>
       'karma-jasmine',
       'karma-ng-html2js-preprocessor'

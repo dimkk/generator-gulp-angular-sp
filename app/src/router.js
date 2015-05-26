@@ -11,15 +11,15 @@ module.exports = function(GulpAngularGenerator) {
 
     if (this.props.router.module === 'ngRoute') {
       this.routerHtml = '<div ng-view></div>';
-      this.routerJs = this.fs.read(this.templatePath('src/app/_ngroute/__ngroute.' + this.props.jsPreprocessor.srcExtension));
+      this.routerJs = this.fs.read(this.templatePath('src/app/_ngroute/__ngroute.' + this.props.jsPreprocessor.extension));
     } else if (this.props.router.module === 'ui.router') {
       this.routerHtml = '<div ui-view></div>';
-      this.routerJs = this.fs.read(this.templatePath('src/app/_uirouter/__uirouter.' + this.props.jsPreprocessor.srcExtension));
+      this.routerJs = this.fs.read(this.templatePath('src/app/_uirouter/__uirouter.' + this.props.jsPreprocessor.extension));
     } else {
       this.routerHtml = this.fs.read(this.templatePath(routerPartialSrc));
       this.routerHtml = this.routerHtml.replace(
         /^<div ([^>]*)>/,
-        '<div $1 ng-controller="MainController as main">'
+        '<div $1 ng-controller="MainCtrl">'
       );
 
       this.routerHtml = this.routerHtml.replace(/\n/g, '\n    ');

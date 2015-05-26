@@ -1,6 +1,5 @@
 /**
  * Created by Dima on 10.05.2015.
- * gulp tasks for gulp-angular yeoman generator, place it to the gulp folder and fill appropriate opts values(folders for sharepoint)
  */
 'use strict';
 var gulp = require('gulp');
@@ -8,21 +7,20 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 var rs = require('run-sequence');
-var options = require('./conf');
-//module.exports = function(options) {
-  
+
+module.exports = function(options) {
   gulp.task('inject-sp', ['partials'], function () {
     var injectStyles = gulp.src([
       options.src + '/app/**/*.css'
-    ], { read: false });
-      //.pipe($.debug());
+    ], { read: false })
+      .pipe($.debug());
 
     var injectScripts = gulp.src([
       options.src + '/app/**/*.js', options.src + '/app/templateCacheHtml.js',
       '!' + options.src + '/app/**/*.spec.js',
       '!' + options.src + '/app/**/*.mock.js'
     ])
-      //.pipe($.debug())
+      .pipe($.debug())
       .pipe($.angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
 
     var injectConst = gulp.src([options.src+ '/app/index.js']);
@@ -101,4 +99,4 @@ var options = require('./conf');
 
     });
   });
-//};
+};

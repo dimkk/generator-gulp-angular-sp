@@ -1,7 +1,5 @@
 angular.module "<%= appName %>"
-  .controller "MainController", () ->
-    vm = this
-    vm.awesomeThings = <%= technologies %>
-    angular.forEach vm.awesomeThings, (awesomeThing) ->
+  .controller "MainCtrl", ($scope) ->
+    $scope.awesomeThings = <%= technologies %>
+    angular.forEach $scope.awesomeThings, (awesomeThing) ->
       awesomeThing.rank = Math.random()
-    return

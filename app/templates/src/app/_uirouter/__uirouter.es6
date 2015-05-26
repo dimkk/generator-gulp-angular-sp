@@ -1,11 +1,10 @@
 
-  .config(($stateProvider, $urlRouterProvider) => {
+  .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        controller: 'MainCtrl'
       });
 
     $urlRouterProvider.otherwise('/');

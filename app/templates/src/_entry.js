@@ -1,24 +1,9 @@
 (function() {
-  'use strict';
-
-  angular
-    .module('<%= appName %>', [<%= modulesDependencies %>])<%= routerJs %>
-})();
-/**
- * Created by Dima on 10.05.2015.
- */
-(function() {
   var headEl = document.getElementsByTagName('head')[0],
-  body = true;
+    body = true;
   var appContainer = document.createElement('div');
   appContainer.innerHTML = '<div ng-app="<%= appName %>"><div ui-view></div></div>';
-  var container = document.getElementById('ng-app-container');
-  if (container) {
-    container.appendChild(appContainer);
-  } else {
-    document.body.appendChild(appContainer);
-  }
-  
+  document.body.appendChild(appContainer);
   var scripts, styles;
   var spAppDir = "";
   var opts=
@@ -63,7 +48,7 @@
     }
 
     sbody ? document.write(outerHTML(el)) : headEl.appendChild(el);
-      //document.body.appendChild(el) : headEl.appendChild(el);//
+    //document.body.appendChild(el) : headEl.appendChild(el);//
   }
 
   function outerHTML(node){

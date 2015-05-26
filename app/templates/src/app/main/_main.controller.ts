@@ -17,19 +17,19 @@ module <%= appName %> {
     }
   }
 
-  export class MainController {
-    public awesomeThings: Thing[];
+  interface IMainScope extends ng.IScope {
+    awesomeThings: Thing[]
+  }
 
+  export class MainCtrl {
     /* @ngInject */
-    constructor () {
-      var vm = this;
-
+    constructor ($scope: IMainScope) {
       var awesomeThings = <%= technologies %>;
 
-      vm.awesomeThings = new Array<Thing>();
+      $scope.awesomeThings = new Array<Thing>();
 
       awesomeThings.forEach(function(awesomeThing: Thing) {
-        vm.awesomeThings.push(awesomeThing);
+        $scope.awesomeThings.push(awesomeThing);
       });
     }
   }

@@ -1,4 +1,3 @@
 angular.module "<%= appName %>"
-  .controller "NavbarController", () ->
-    vm = this
-    vm.date = new Date()
+  .controller "NavbarCtrl", ($scope) ->
+    $scope.date = new Date()

@@ -52,7 +52,7 @@ module.exports = function(options) {
     return gulp.src(options.src + '/*.html')
       .pipe($.inject(injectStyles, injectOptions))
       .pipe($.inject(injectScripts, injectOptions))
-      .pipe(wiredep(options.wiredep))
+      .pipe(wiredep(_.extend({}, options.wiredep)))//Fixed test:auto
       .pipe(gulp.dest(options.tmp + '/serve'));
 
   });

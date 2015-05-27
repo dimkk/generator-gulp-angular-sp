@@ -6,6 +6,8 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 
+var _ = require('lodash');
+
 module.exports = function(options) {
 <% if (props.cssPreprocessor.key !== 'none') { %>
   gulp.task('inject', ['scripts', 'styles'], function () {

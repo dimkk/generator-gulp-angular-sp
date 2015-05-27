@@ -19,8 +19,12 @@ var questions = [
   'jQuery',
   'resource',
   'router',
+  'ui',
+  'bootstrapComponents',
+  'foundationComponents',
   'cssPreprocessor',
-  'jsPreprocessor'
+  'jsPreprocessor',
+  'htmlPreprocessor'
 ];
 
 var model = {};
@@ -58,6 +62,18 @@ model.router.choices.forEach(function(choice) {
   model.router.values[choice.value.key] = choice.value;
 });
 
+model.ui.choices.forEach(function(choice) {
+  model.ui.values[choice.value.key] = choice.value;
+});
+
+model.bootstrapComponents.choices.forEach(function(choice) {
+  model.bootstrapComponents.values[choice.value.key] = choice.value;
+});
+
+model.foundationComponents.choices.forEach(function(choice) {
+  model.foundationComponents.values[choice.value.key] = choice.value;
+});
+
 model.cssPreprocessor.choices.forEach(function(choice) {
   model.cssPreprocessor.values[choice.value.key] = choice.value;
 });
@@ -66,6 +82,9 @@ model.jsPreprocessor.choices.forEach(function(choice) {
   model.jsPreprocessor.values[choice.value.key] = choice.value;
 });
 
+model.htmlPreprocessor.choices.forEach(function(choice) {
+  model.htmlPreprocessor.values[choice.value.key] = choice.value;
+});
 
 module.exports = {
   prompts: model,
@@ -75,7 +94,11 @@ module.exports = {
     jQuery: model.jQuery.values['jquery 2'],
     resource: model.resource.values['angular-resource'],
     router: model.router.values['ui-router'],
+    ui: model.ui.values.bootstrap,
+    bootstrapComponents: model.bootstrapComponents.values['ui-bootstrap'],
+    foundationComponents: model.foundationComponents.values.none,
     cssPreprocessor: model.cssPreprocessor.values['node-sass'],
-    jsPreprocessor: model.jsPreprocessor.values.none
+    jsPreprocessor: model.jsPreprocessor.values.none,
+    htmlPreprocessor: model.htmlPreprocessor.values.none
   }
 };

@@ -79,7 +79,7 @@ describe('gulp-angular generator paths script', function () {
     it('should add as many .. as src sub folders', function() {
       generator.props = { paths: { src: 'test/path' } };
       generator.computePaths();
-      generator.computedPaths.appToBower.should.be.equal('../..');
+      generator.computedPaths.appToBower.should.be.equal('..\\..');
     });
   });
 

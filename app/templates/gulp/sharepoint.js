@@ -10,6 +10,8 @@ var rs = require('run-sequence');
 
 module.exports = function(options) {
   gulp.task('inject-sp', ['partials'], function () {
+    if (options.mappedSpDir === 'z:\\pathToAppFolder\\') throw new Error('no mappedSpDir set in gulpfile.js!');
+    if (!options.spAppDir === '/SiteAssets/app/') throw new Error('no spAppDir set in gulpfile.js!');
     var injectStyles = gulp.src([
       options.src + '/app/**/*.css'
     ], { read: false })

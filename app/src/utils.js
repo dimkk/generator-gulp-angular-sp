@@ -19,7 +19,7 @@ function normalizePath(str) {
   } else {
     trailingSlash = new RegExp(path.sep + path.sep + '$');
   }
-  return slash(path.normalize(str).replace(trailingSlash, ''));
+  return slash(path.normalize(str).replace(trailingSlash, '')); // TODO check why tests are failing
 }
 
 /**

@@ -51,7 +51,7 @@ module.exports = function(GulpAngularGenerator) {
         type: 'confirm',
         name: 'skipConfig',
         message: 'Existing ' + chalk.green('.yo-rc') + ' configuration found, would you like to use it?',
-        default: true,
+        default: true
       }], function (answers) {
         this.skipConfig = answers.skipConfig;
 
@@ -78,34 +78,50 @@ module.exports = function(GulpAngularGenerator) {
     }
 
     var done = this.async();
-
-    _.findWhere(prompts, {name: 'bootstrapComponents'}).when = function(props) {
-      return props.ui.key === 'bootstrap';
-    };
-
-    _.findWhere(prompts, {name: 'foundationComponents'}).when = function(props) {
-      return props.ui.key === 'foundation';
-    };
+    //_.findWhere(prompts, {name: 'bootstrapComponents'}).when = function(props) {
+    //  return props.ui.key === 'bootstrap';
+    //};
+    //
+    //_.findWhere(prompts, {name: 'foundationComponents'}).when = function(props) {
+    //  return props.ui.key === 'foundation';
+    //};
 
     this.prompt(prompts, function (props) {
-      if(props.ui.key !== 'bootstrap') {
+      //if(props.ui.key !== 'bootstrap') {
         props.bootstrapComponents = {
           name: null,
           version: null,
           key: null,
           module: null
         };
-      }
+      //}
 
-      if(props.ui.key !== 'foundation') {
+      //if(props.ui.key !== 'foundation') {
         props.foundationComponents = {
           name: null,
           version: null,
           key: null,
           module: null
         };
-      }
-
+      //}
+      props.ui = {
+        "key": "none",
+        "module": null,
+        "value": {
+          "key": "none",
+          "module": null
+        },
+        "name": "None"
+      };
+      props.htmlPreprocessor =  {
+        "key": "none",
+        "extension": "html",
+        "value": {
+          "key": "none",
+          "extension": "html"
+        },
+        "name": "None, I like to code in standard HTML."
+      };
       this.props = _.merge(this.props, props);
 
       done();
